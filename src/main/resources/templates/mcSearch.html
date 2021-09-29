@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="image/common/yufan.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="author" content="yufan">
+    <meta name="mail" content="yufanfox@foxmail.com">
+    <title>Book&nbsp;TBM</title>
+  <style type="text/css">
+      body{
+          margin: 0;
+      }
+    .body{
+        border: 0;
+        width: 100%;
+        height: 100%;
+        min-height: 700px;
+        min-width: 1020px;
+        background-image: url("image/mcTheme/mcBackground.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        position: absolute;
+        z-index: -10;
+    }
+
+    .title{
+        background-image: url("image/mcTheme/mcTitle.png");
+        float: right;
+        height: 40%;
+        width: 75%;
+    }
+
+    .liMenu{
+        list-style: none;
+    }
+    .liChild li{
+        list-style: none;
+    }
+    .liMenu a{
+        float: left;
+        writing-mode: vertical-rl;
+    }
+    .liChild li a{
+        float: right;
+        display: none;
+    }
+    .liMenu a:hover .liChild li a{
+        display: block;
+    }
+
+  </style>
+</head>
+<body>
+<div class="body">
+    <div class="title"></div>
+    <div>
+        <ul>
+            <li class="liMenu"><a href="#">更改风格</a>
+                <ul class="liChild">
+                    <li><a href="mcSearch">MineCraft</a></li>
+                    <li><a href="l">风格2</a></li>
+                    <li><a href="#">风格3</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div>
+
+        <label for="searchInput">搜索<input id="searchInput" type="search" maxlength=12 placeholder="请输入书名..."></label>
+    </div>
+
+
+
+
+</div>
+
+</body>
+</html>

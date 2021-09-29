@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+    <style>
+
+        #newFormCancelBtn, #newFormSubmitBtn{
+            cursor: pointer;
+            background-color: rgba(0,0,0,0);
+            width: 100px;
+            float: right;
+            margin-right: 30px;
+            height: 30px;
+            font-family: "Times New Roman", 'KaiTi';
+            font-size: 22px;
+        }
+        #newFormSubmitBtn:hover{
+            background-color: #9ad824;
+            color: white;
+        }
+        #newFormCancelBtn:hover{
+            background-color: red;
+            color: white;
+        }
+
+        #newFormImgDiv:hover #newFormImg{
+            display: none;
+        }
+
+        #newForm::-webkit-scrollbar, body::-webkit-scrollbar, #abstract::-webkit-scrollbar{
+            width: 10px;
+            height: 1px;
+        }
+        #newForm::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb, #abstract::-webkit-scrollbar-thumb{
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            background: #b7b7b8;
+        }
+        #newForm::-webkit-scrollbar-track, body::-webkit-scrollbar-track, #abstract::-webkit-scrollbar-track{
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            background: #ededed;
+        }
+
+        .img{
+            float: right;
+            width: 100px;
+            height: 130px;
+            min-width: 100px;
+            min-height: 130px;
+            display: block
+        }
+
+        .imgBtn{
+            float: right;
+            display: none;
+            word-wrap: break-word;
+            word-break: break-all;
+            white-space: normal;
+            width: 100px;
+            height: 130px;
+            min-width: 100px;
+            min-height: 130px;
+        }
+
+        .imgDiv{
+            float: right;
+            position: absolute;
+            right: 19px;
+            top: 19px;
+        }
+        .imgDiv:hover .img{
+            display: none;
+        }
+        .imgDiv:hover .imgBtn{
+            display: block;
+        }
+
+        .buttonForm{
+            margin-right: 30px;
+            margin-top: 10px;
+            background-color: rgba(0,0,0,0);
+            font-family: "Times New Roman", "KaiTi";
+            font-size: 20px;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+        .buttonForm:hover{
+            box-shadow: 0 0 10px black;
+        }
+        tr:hover{
+            box-shadow: 0 0 10px black;
+            cursor: pointer;
+        }
+        .newForm{
+            float: right;
+            width: 39%;
+            min-width: 39%;
+            border-color: black;
+            position: fixed;
+            right: 1%;
+            top: 44%;
+            overflow: auto;
+            height: 56%;
+            border-top: 1px black;
+            border-bottom: 1px black;
+        }
+        label,button{
+            white-space:nowrap;
+        }
+        .textBox{
+            float: left;
+            width: 200px;
+            height: 23px;
+            padding: 0;
+            border: 0;
+            background-color: rgba(0,0,0,0);
+            resize: none;
+            font-family: "Times New Roman", "KaiTi";
+            font-size: 20px;
+            outline: none;
+        }
+        .textBox:hover{
+            box-shadow: 0 0 10px black;
+        }
+        td,th{
+            border-bottom: 1px solid #ddd;
+        }
+        .select {
+            border: solid 1px #000;
+            font-family: "Times New Roman", "KaiTi";
+            appearance:none;
+            -moz-appearance:none;
+            -webkit-appearance:none;
+            float: left;
+            height: 100%;
+            padding-right: 14px;
+            background: url("image/mainTheme/arrow.png") no-repeat scroll right center transparent;
+        }
+        .select::-ms-expand { display: none; }
+        .tableFont{
+            font-family: "Times New Roman", "KaiTi";
+            font-size: 20px;
+            float: left;
+            width: 80%;
+            height: 100%;
+        }
+        .font > p {
+            font-family: "Times New Roman", "KaiTi";
+            font-size: 80px;
+            text-shadow: 0 0 10px black;
+            color: white;
+        }
+        .font2 > p {
+            font-family: "Times New Roman", "KaiTi";
+            font-size: 20px;
+            text-shadow: 0 0 2px black;
+            color: white;
+        }
+        .button{
+            padding: 0;
+            float: left;
+            width:100px;
+            height:45px;
+            font-size:23px;
+            font-family: "Times New Roman", "KaiTi";
+            text-align:center;
+            text-shadow: 0 0 5px black;
+            color: white;
+            border: rgba(0,0,0,0);
+            border-radius:25px;
+            background: rgba(0,0,0,0);
+            cursor:pointer;
+        }
+        .button:hover{
+            text-shadow: 0 0 10px black;
+        }
+        .button2{
+            padding: 0;
+            font-size:20px;
+            font-family: "Times New Roman", "KaiTi";
+            text-align:center;
+            text-shadow: 0 0 3px black;
+            color: white;
+            border: rgba(0,0,0,0);
+            background: rgba(0,0,0,0);
+            cursor:pointer;
+        }
+        .button2:hover{
+            text-shadow: 0 0 8px black;
+        }
+    </style>
+    <link rel="icon" href="image/common/yufan.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="author" content="yufan">
+    <meta name="mail" content="yufanfox@foxmail.com">
+    <title>Book&nbsp;TBM</title>
+    <link rel="stylesheet" href="style/menu.css">
+</head>
+<body>
+<div id="container" style="width:100%;height: 100%">
+    <div style="float: left; width: 20%;height: 30%">
+        <img src="image/mainTheme/tenX.png">
+    </div>
+<!--    title-->
+    <div class="font" style="width: 40%;float: left;height: 30%">
+            <p style="text-align: right">Book&nbsp;&nbsp;&nbsp;TBM</p>
+    </div>
+    <div style="width: 40%;float: right;height: 30%" class="font2">
+
+        <ul class="nav">
+                <li class="drop-down"><a href="#">更改风格</a>
+                    <ul class="drop-down-content">
+                        <li><a href="mcSearch">MineCraft</a></li>
+                        <li><a href="l">风格2</a></li>
+                        <li><a href="#">风格3</a></li>
+                    </ul>
+                </li>
+                <li class="drop-down"><a href="#">作业内容</a>
+                    <ul class="drop-down-content">
+                        <li><a href="starTable">行星table</a></li>
+                        <li><a href="easyForm">支付表单</a></li>
+                        <li><a href="etiquetteExam">考试</a></li>
+                        <li><a href="calculator">计算器</a></li>
+                        <li><a href="uiDesign">UI设计器</a></li>
+                    </ul>
+                </li>
+            </ul>
+        <p style="text-align: left;height: 25%">&nbsp;</p>
+        <p style="text-align: left;height: 75%">@羽帆</p>
+<!--        <label for="datetime"></label><input type="datetime-local" name="datetime" id="datetime">-->
+    </div>
+
+    <div class="tableFont" style="width: 100%;float: left;height: 5%">
+        <button class="button" id="updateBookList" type="button" >调用爬虫</button>
+            <label for="searchBookUserInput" style="float: left; width: 330px; height: 22px">要搜索吗</label>
+            <label style="float: left; width: 240px; height: 22px">完结状态</label><label style="float: left;width:45px; height: 22px">排序</label>
+            <select class="select" id="select" style="float: left" name="select">
+                <option value="bookId" selected="selected">序号</option>
+                <option value="modifiedTime">修改时间</option>
+                <option value="bookName">书名</option>
+                <option value="author">作者</option>
+            </select><br>
+            <label><input type="search" id="searchBookUserInput" class="textBox" maxlength=12 placeholder="请输入书名..."></label>
+            <button type="button" id="searchBook" class="button2" style="float: left; width: 120px">点我搜索</button>
+            <label for="all" style="float: left"><input id="all" name="status" type="radio" value="all" checked="checked">全部</label>
+            <label for="finished" style="float: left"><input id="finished" name="status" type="radio" value="finished">已完结</label>
+            <label for="unfinished" style="float: left"><input id="unfinished" name="status" type="radio" value="unfinished">连载中</label>
+            <label for="ascending" style="float: left"><input id="ascending" name="order" type="radio" value="ascending" checked="checked">正序排列</label>
+            <label for="descending" style="float: left"><input id="descending" name="order" type="radio" value="descending">倒序排序</label>
+        <table class="tableFont" style="width: 100%" id="main_table"></table>
+        <div style="display: none" id="newForm" class="newForm">
+            <form action="/easyForm" method="post">
+                    <fieldset>
+                        <legend>图书详情</legend>
+                        <div id="newFormImgDiv" class="imgDiv">
+                            <img src="" id="newFormImg" class="img">
+                            <input type="file" id="newFormImgFile">
+                            <button type="button" id="newFormImgDivBtn" onclick="modifyBookImg()" class="imgBtn buttonForm" style="margin: 0">修改封面图片</button>
+                        </div>
+                        <label style="float: left" for="bookNameInput">书名:&nbsp;</label><input class="textBox" type="text" id="bookNameInput" name="bookNameInput">
+                        <label id="bookNameInputLabel" style="color: red"></label>
+                        <br><br>
+                        <label style="float: left" for="bookAuthorInput">作者:&nbsp;</label><input class="textBox" type="text" id="bookAuthorInput" name="bookAuthorInput">
+                        <label id="bookAuthorInputLabel" style="color: red"></label>
+                        <br><br>
+                        <label style="float: left" for="newFormSelect">完结状态:&nbsp;</label>
+                        <select id="newFormSelect" class="select" name="newFormSelect">
+                            <option id="newFormSelectFinished">完结</option>
+                            <option id="newFormSelectUnfinished">连载中</option>
+                        </select>
+                        <br><br>
+                        <fieldset id="abstractBox">
+                            <legend>概要</legend>
+                            <label for="abstract"></label><textarea name="abstract" class="textBox" style="resize: none;width: 100%;height: auto;min-height: 100px" id="abstract">默认内容</textarea>
+                        </fieldset>
+                        <br>
+                        <fieldset>
+                            <legend>评论</legend>
+                            <div id="newFormComment"></div>
+                            <label for="comment"></label><textarea name="comment" class="textBox" style="resize: none;width: 100%;height: auto;min-height: 100px" id="comment" placeholder="在这里评论，请输入内容..."></textarea>
+                        </fieldset>
+                        <br>
+                        <fieldset>
+                            <legend>功能区</legend>
+                            <div id="newFormDiv"></div>
+                        </fieldset>
+                        <br>
+                        <button id="newFormCancelBtn" onclick="cancel()" type="button">取消</button>
+                        <button id="newFormSubmitBtn" onclick="submitCheck()" type="button">提交</button>
+                        <button id="newFormSubmitBtnHidden" type="submit" style="display: none"></button>
+                        <div id="newFormSubmit"></div>
+                    </fieldset>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+    function login() {
+        var formData = new FormData($("#main_form")[0]);
+        console.log(formData)
+        $.ajax({
+            //几个参数需要注意一下
+
+            // dataType: "json",//预期服务器返回的数据类型
+            url: "/test" ,//url
+            type: "POST",//方法类型
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                // console.log(result);//打印服务端返回的数据(调试用)
+                alert(data)
+
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
+    }
+</script>
+<!--    将时间戳转换成日期格式-->
+<script>
+    function getLocalTime(nS) {
+        return new Date(parseInt(nS)).toLocaleString();
+    }
+</script>
+<!--    新建表单-->
+<script>
+    //<![CDATA[
+    function newForm(tr){
+        document.getElementById("main_table").style.width="60%";
+        document.getElementById("newForm").style.display="block";
+        document.getElementById("bookNameInput").value=bookData[tr.id-1]["bookName"];
+        document.getElementById("bookAuthorInput").value=bookData[tr.id-1]["author"];
+        if(bookData[tr.id-1]["bookStatus"]==="完结"){
+            document.getElementById("newFormSelectFinished").selected = "selected";
+        }else {
+            document.getElementById("newFormSelectUnfinished").selected = "selected";
+        }
+        document.getElementById("abstract").textContent = bookData[tr.id-1]["txtUrl"];
+        document.getElementById("newFormImg").src = bookData[tr.id-1]["imageUrl"];
+        document.getElementById("abstract").scrollTop = 0;
+        document.getElementById("newForm").scrollTop = 0;
+
+        let tmp = "";
+        tmp = tmp + "<input class='buttonForm' type='button' onclick='clickBtn(this)' value='获取URL' id='urlBtn";
+        tmp = tmp + bookData[tr.id-1]["bookId"];
+        tmp = tmp + "'>";
+        tmp = tmp + "<button class='buttonForm' name='";
+        tmp = tmp + bookData[tr.id-1]["bookStatus"];
+        tmp = tmp + "' type='button' value='";
+        tmp = tmp + bookData[tr.id-1]["bookName"];
+        tmp = tmp + "' onclick='clickBtn2(this)' id=";
+        tmp = tmp + bookData[tr.id-1]["bookId"];
+        tmp = tmp + ">修改状态";
+        $('#newFormDiv').html(tmp);
+
+        let content = searchComment(tr.id)
+        // alert(content);
+        tmp = "";
+        if(content.length === 0){
+            tmp = tmp + "<p>暂无评论</p><br>"
+        }else {
+            for(var i=0;i<content.length;i++){
+                tmp = tmp + "<fieldset><legend>";
+                tmp = tmp + content[i]["commentMan"] + "&nbsp;" + content[i]["commentTime"];
+                tmp = tmp + "</legend>";
+                tmp = tmp + "<textarea readonly style='resize: none; width: 100%; height: auto; padding: 0; margin: 0; border: 0; background: rgba(0,0,0,0); font-family: Times New Roman, KaiTi,serif; font-size: 23px; outline: none'>";
+                tmp = tmp + content[i]["commentContent"];
+                tmp = tmp + "</textarea></fieldset><br>";
+            }
+        }
+        $('#newFormComment').html(tmp);
+    }
+    //]]>
+</script>
+<!--    搜索评论-->
+<script>
+    function searchComment(value){
+        return commentData.filter(function (a){
+            // alert("bookID:"+a["bookId"]);
+            // alert("value:"+value);
+            return a["bookId"].toString() === value;
+        })
+    }
+</script>
+<!--    创建表格-->
+<script>
+    function createTable(data){
+        var tmp = "";
+        tmp = tmp + "<thead>" +
+            "<tr>" +
+            "<th>序号</th>" +
+            "<th>书名</th>" +
+            "<th>作者</th>" +
+            "<th>最新章节</th>" +
+            "<th>状态</th>" +
+            "<th>修改时间</th>" +
+            "</tr>" +
+            "</thead>"
+        for (var i in data) {
+            tmp = tmp + "<tr onclick='newForm(this)' id='" +data[i]["bookId"]+ "'>"
+            tmp = tmp + "<td>" + data[i]["bookId"] + "</td>";
+            var modifiedTime = data[i]["modifiedTime"];
+            var nowTime = Date.parse(new Date());
+            if ((nowTime - modifiedTime) < 86400000){
+                tmp = tmp + "<td>" + data[i]["bookName"] + "<img src='image/common/redPoint1.png'>" + "</td>";
+            }else {
+                tmp = tmp + "<td>" + data[i]["bookName"] + "</a></td>";
+            }
+            tmp = tmp + "<td>" + data[i]["author"] + "</td>";
+            tmp = tmp + "<td>" + data[i]["theLastChapter"] + "</td>";
+            tmp = tmp + "<td>" + data[i]["bookStatus"] + "</td>";
+            tmp = tmp + "<td>" + getLocalTime(data[i]["modifiedTime"])+ "</td>";
+            tmp = tmp + "</tr>";
+        }
+        $('#main_table').html(tmp);
+    }
+</script>
+<!--    排序-->
+<script>
+    var bookData;
+    var commentData;
+    function jsonSort(array, field, reverse) {
+        //数组长度小于2 或 没有指定排序字段 或 不是json格式数据
+        if(array.length < 2 || !field ||typeof array[0] !=="object") return array;
+        //数字类型排序
+        if(typeof array[0][field] === "number") {
+            array.sort(function(x, y) {return x[field] - y[field]});
+        }
+        //字符串类型排序
+        if(typeof array[0][field] === "string") {
+            array.sort(function(x, y) {return x[field].localeCompare(y[field])});
+        }
+        //倒序
+        if(reverse !== "ascending") {
+            array.reverse();
+        }
+        return array;
+    }
+</script>
+<!--    搜索-->
+<script>
+    function searchBook(array,value){
+        return array.filter(function(a) {
+            var conut = 0;
+            for (var i=0;i<value.length;i++) {
+                if (a["bookName"].toString().indexOf(value[i])!==-1){
+                    conut++;
+                }
+            }
+            return conut === value.length});
+    }
+</script>
+<!--    点击爬虫按钮事件-->
+<!--    done-->
+<script>
+    $(function (){
+        $("#updateBookList").click(function (){
+            if(confirm('将会调用爬虫更新,这也许会持续几分钟,确定继续吗?')===true){
+                $.get("/useCrawler", function (data){
+                    bookData = data;
+                    $('#searchBook').trigger('click');
+                });
+            }
+        });
+    });
+</script>
+<!--    点击搜索按钮事件-->
+<script>
+    $(function (){
+        $("#searchBook").click(function (){
+            var value = $("#searchBookUserInput").val();
+            var status = $("input[name=status]:checked").val();
+            var order = $("input[name=order]:checked").val();
+            var options=$("#select option:selected");//获取当前选择项.
+            // 获取当前选择项的值.
+            var field = options.val();
+            if(status === "finished"){
+                status = "完结";
+            }else if (status === "unfinished"){
+                status = "连载中";
+            }else status = "";
+            var searchData = searchBook(bookData,value);
+            var sortedData = jsonSort(searchData,field,order);
+            var selectData = selectBook(sortedData,status);
+            createTable(selectData);
+        });
+    });
+</script>
+<!--    表单取消按钮-->
+<script>
+    function cancel(){
+        document.getElementById("newForm").style.display = "none";
+        document.getElementById("main_table").style.width="100%";
+    }
+</script>
+<!--    筛选-->
+<script>
+    function selectBook(array,value){
+        return array.filter(function(a) {
+            return a["bookStatus"].toString().indexOf(value)!==-1;});
+    }
+</script>
+<!--    获取book数据-->
+<script>
+    $(document).ready(function (){
+        $.get("/search", function (data){
+            bookData = data;
+        });
+    });
+</script>
+<!--    获取评论数据-->
+<script>
+    commentData = [
+        {
+            "bookId":1,
+            "commentMan":"张三",
+            "commentTime":"21/08/05",
+            "commentContent":"这是张三的一个图书1的评论"
+        },
+        {
+            "bookId":1,
+            "commentMan":"李四",
+            "commentTime":"21/08/21",
+            "commentContent":"这是李四的一个图书1的评论"
+        },
+        {
+            "bookId":1,
+            "commentMan":"王五",
+            "commentTime":"21/08/07",
+            "commentContent":"这是王五的一个图书1的评论"
+        },
+        {
+            "bookId":1,
+            "commentMan":"小李",
+            "commentTime":"21/08/15",
+            "commentContent":"这是小李的一个图书1的评论"
+        },
+        {
+            "bookId":2,
+            "commentMan":"小刚",
+            "commentTime":"21/08/14",
+            "commentContent":"这是小刚的一个图书2的评论"
+        },
+        {
+            "bookId":2,
+            "commentMan":"老纪",
+            "commentTime":"21/08/12",
+            "commentContent":"这是老纪的一个图书2的评论"
+        },
+        {
+            "bookId":3,
+            "commentMan":"小李",
+            "commentTime":"21/08/05",
+            "commentContent":"这是小李的一个图书3的评论"
+        }
+    ]
+</script>
+<!--    点击table按钮1 获取URL-->
+<!--    todo-->
+<script>
+    function clickBtn(){
+
+    }
+</script>
+<!--    点击table按钮2 修改状态-->
+<script>
+    function clickBtn2(btn){
+        var status;
+        if (btn.name === "完结"){
+            status = "连载中";
+        }else status = "完结";
+
+        if (confirm("当前修改书名为：\nId:"+btn.id+"\n书名："+btn.value+"\n将会改变完结状态：\n从"+btn.name+"---->"+status+"\n确认吗")){
+            var id = btn.id;
+            $.post("modifyBookStatus",{id, status}, function (data){
+                bookData = data
+                $('#searchBook').trigger('click');
+            });
+        }
+
+    }
+</script>
+<!--    修改封面图片-->
+<script>
+    function fileExists(url){
+        var isExists;
+        $.ajax({
+            url:url,
+            async:false,
+            type:'HEAD',
+            timeout:2000,
+            error:function(){
+                isExists=0;
+            },
+            success:function(){
+                isExists=1;
+            }
+        });
+        if(isExists==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    function sleep(numberMillis) {
+        var now = new Date();
+        var exitTime = now.getTime() + numberMillis;
+        while (true) {
+            now = new Date();
+            if (now.getTime() > exitTime) return;
+        }
+    }
+
+    function modifyBookImg(){
+        var myFormData = new FormData();
+        myFormData.append('myFile',$("#file")[0].files[0]);
+
+        // alert($("#file").content);
+        $.ajax({
+            url: "test",
+            type: "POST",
+            data: myFormData,
+            processData: false,
+            contentType: false,
+            success: function(response){
+                // 根据返回结果指定界面操作
+                while (true){
+                    sleep(500);
+                    if (fileExists(response)){
+                        break;
+                    }
+                    console.log("please wait"+new Date());
+                }
+                document.getElementById("newFormImg").src = response;
+            },
+            error: function (){
+                alert("error");
+            }
+        });
+    }
+</script>
+<!--    点击单选框事件-->
+<script>
+    $(function(){
+        $(":radio").click(function(){
+            var value = $("#searchBookUserInput").val();
+            var status = $("input[name=status]:checked").val();
+            var order = $("input[name=order]:checked").val();
+            var options=$("#select option:selected");//获取当前选择项.
+            // 获取当前选择项的值.
+            var field = options.val();
+            if(status === "finished"){
+                status = "完结";
+            }else if (status === "unfinished"){
+                status = "连载中";
+            }else status = "";
+            var searchData = searchBook(bookData,value);
+            var sortedData = jsonSort(searchData,field,order);
+            var selectData = selectBook(sortedData,status);
+            createTable(selectData);
+        });
+    });
+</script>
+<!--    下拉框改变事件-->
+<script>
+    $(function(){
+        $("select").change(function(){
+            var value = $("#searchBookUserInput").val();
+            var status = $("input[name=status]:checked").val();
+            var order = $("input[name=order]:checked").val();
+            var options=$("#select option:selected");//获取当前选择项.
+            // 获取当前选择项的值.
+            var field = options.val();
+            if(status === "finished"){
+                status = "完结";
+            }else if (status === "unfinished"){
+                status = "连载中";
+            }else status = "";
+            var searchData = searchBook(bookData,value);
+            var sortedData = jsonSort(searchData,field,order);
+            var selectData = selectBook(sortedData,status);
+            createTable(selectData);
+        });
+    });
+</script>
+<!--    动态搜索-->
+<script>
+    $(function (){
+        $("#searchBookUserInput").bind("input propertychange", function (){
+            $('#searchBook').trigger('click');
+        });
+    })
+</script>
+<!--    数据动态校验-->
+<script>
+    $(function (){
+        $("#bookNameInput").bind("input propertychange", function (){
+            if(!document.getElementById("bookNameInput").value){
+                document.getElementById("bookNameInputLabel").textContent = "书名不能为空!";
+            }
+            else document.getElementById("bookNameInputLabel").textContent = "";
+        });
+    })
+
+    $(function (){
+        $("#bookAuthorInput").bind("input propertychange", function (){
+            if(!document.getElementById("bookAuthorInput").value){
+                document.getElementById("bookAuthorInputLabel").textContent = "作者不能为空!";
+            }
+            else document.getElementById("bookAuthorInputLabel").textContent = "";
+        });
+    })
+
+</script>
+<!--    数据提交校验-->
+<!--    todo-->
+<script>
+    function submitCheck(){
+        let bookName = document.getElementById("bookNameInput").value;
+        let bookAuthor = document.getElementById("bookAuthorInput").value;
+        if(!bookName || !bookAuthor){
+            alert("书名或作者不能为空！");
+        }else {
+            $('#newFormSubmitBtnHidden').trigger('click');
+        }
+    }
+</script>
+<!--    背景效果-->
+<script>
+    !
+        function() {
+            function n(n, e, t) {
+                return n.getAttribute(e) || t
+            }
+            function e(n) {
+                return document.getElementsByTagName(n)
+            }
+            function t() {
+                var t = e("script"),
+                    o = t.length,
+                    i = t[o - 1];
+                return {
+                    l: o,
+                    z: n(i, "zIndex", -1),
+                    o: n(i, "opacity", .5),
+                    c: n(i, "color", "0,0,0"),
+                    n: n(i, "count", 99)
+                }
+            }
+            function o() {
+                a = m.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+                    c = m.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+            }
+            function i() {
+                r.clearRect(0, 0, a, c);
+                var n, e, t, o, m, l;
+                s.forEach(function(i, x) {
+                    for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 : 1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1, 1), e = x + 1; e < u.length; e++) n = u[e],
+                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o, i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t / 2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y), r.lineTo(n.x, n.y), r.stroke()))
+                }),
+                    x(i)
+            }
+            var a, c, u, m = document.createElement("canvas"),
+                d = t(),
+                l = "c_n" + d.l,
+                r = m.getContext("2d"),
+                x = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+                    function(n) {
+                        window.setTimeout(n, 1e3 / 45)
+                    },
+                w = Math.random,
+                y = {
+                    x: null,
+                    y: null,
+                    max: 2e4
+                };
+            m.id = l,
+                m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z + ";opacity:" + d.o,
+                e("body")[0].appendChild(m),
+                o(),
+                window.onresize = o,
+                window.onmousemove = function(n) {
+                    n = n || window.event,
+                        y.x = n.clientX,
+                        y.y = n.clientY
+                },
+                window.onmouseout = function() {
+                    y.x = null,
+                        y.y = null
+                };
+            for (var s = [], f = 0; d.n > f; f++) {
+                var h = w() * a,
+                    g = w() * c,
+                    v = 2 * w() - 1,
+                    p = 2 * w() - 1;
+                s.push({
+                    x: h,
+                    y: g,
+                    xa: v,
+                    ya: p,
+                    max: 6e3
+                })
+            }
+            u = s.concat([y]),
+                setTimeout(function() {
+                        i()
+                    },
+                    100)
+        } ();
+</script>
+</body>
+</html>

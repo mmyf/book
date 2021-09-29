@@ -1,0 +1,91 @@
+1627896454705	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "--disable-gpu" "-foreground" "-no-remote" "-profile" "C:\\Users\\LX\\AppData\\Local\\Temp\\rust_mozprofile9N857z"
+*** You are running in headless mode.
+1627896455016	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\LX\\AppData\\Local\\Temp\\rust_mozprofile9N857z\\search.json.mozlz4", (void 0)))
+1627896456144	Marionette	INFO	Listening on port 63364
+1627896456257	Marionette	WARN	TLS certificate errors will be ignored for this session
+1627896561520	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1627896725008	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+console.error: services.settings: 
+  main/doh-providers Signature failed  InvalidSignatureError: Invalid content signature (main/doh-providers)
+console.error: services.settings: 
+  main/doh-providers local data was corrupted
+console.warn: services.settings: main/doh-providers Signature verified failed. Retry from scratch
+console.error: services.settings: 
+  main/doh-config Signature failed  InvalidSignatureError: Invalid content signature (main/doh-config)
+console.error: services.settings: 
+  main/doh-config local data was corrupted
+console.warn: services.settings: main/doh-config Signature verified failed. Retry from scratch
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+1627896986241	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: resource:///actors/ContentMetaChild.jsm, line 179: InvalidStateError: JSWindowActorChild.sendAsyncMessage: JSWindowActorChild cannot send at the moment
+1627897419234	Marionette	INFO	Stopped listening on port 63364
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1627898561671	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "--disable-gpu" "-foreground" "-no-remote" "-profile" "C:\\Users\\LX\\AppData\\Local\\Temp\\rust_mozprofilenOtZg0"
+*** You are running in headless mode.
+1627898562025	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\LX\\AppData\\Local\\Temp\\rust_mozprofilenOtZg0\\search.json.mozlz4", (void 0)))
+1627898563190	Marionette	INFO	Listening on port 52347
+1627898563241	Marionette	WARN	TLS certificate errors will be ignored for this session
+1627898649457	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: resource:///modules/FaviconLoader.jsm, line 596: InvalidStateError: JSWindowActorChild.sendAsyncMessage: JSWindowActorChild cannot send at the moment
+console.error: services.settings: 
+  main/doh-providers Signature failed  InvalidSignatureError: Invalid content signature (main/doh-providers)
+console.error: services.settings: 
+  main/doh-providers local data was corrupted
+console.warn: services.settings: main/doh-providers Signature verified failed. Retry from scratch
+console.error: services.settings: 
+  main/doh-config Signature failed  InvalidSignatureError: Invalid content signature (main/doh-config)
+console.error: services.settings: 
+  main/doh-config local data was corrupted
+console.warn: services.settings: main/doh-config Signature verified failed. Retry from scratch
+1627898989885	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1627899034341	Marionette	INFO	Stopped listening on port 52347
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1628153119963	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "--disable-gpu" "-foreground" "-no-remote" "-profile" "C:\\Users\\LX\\AppData\\Local\\Temp\\rust_mozprofileO7j4LI"
+*** You are running in headless mode.
+1628153120374	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\LX\\AppData\\Local\\Temp\\rust_mozprofileO7j4LI\\search.json.mozlz4", (void 0)))
+1628153121638	Marionette	INFO	Listening on port 54774
+1628153122031	Marionette	WARN	TLS certificate errors will be ignored for this session
+1628153256785	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1628153424524	Marionette	INFO	Stopped listening on port 54774
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1628582658135	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-headless" "--disable-gpu" "-foreground" "-no-remote" "-profile" "C:\\Users\\LX\\AppData\\Local\\Temp\\rust_mozprofilels2pAb"
+*** You are running in headless mode.
+1628582658455	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\LX\\AppData\\Local\\Temp\\rust_mozprofilels2pAb\\search.json.mozlz4", (void 0)))
+1628582659525	Marionette	INFO	Listening on port 53653
+1628582659686	Marionette	WARN	TLS certificate errors will be ignored for this session
+1628582771761	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1628582801066	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1628582934705	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+console.error: services.settings: 
+  main/doh-providers Signature failed  InvalidSignatureError: Invalid content signature (main/doh-providers)
+console.error: services.settings: 
+  main/doh-providers local data was corrupted
+console.warn: services.settings: main/doh-providers Signature verified failed. Retry from scratch
+console.error: services.settings: 
+  main/doh-config Signature failed  InvalidSignatureError: Invalid content signature (main/doh-config)
+console.error: services.settings: 
+  main/doh-config local data was corrupted
+console.warn: services.settings: main/doh-config Signature verified failed. Retry from scratch
+1628583072479	Marionette	INFO	Stopped listening on port 53653
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

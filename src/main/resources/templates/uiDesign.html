@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" draggable="false">
+<head>
+    <meta charset="UTF-8">
+    <title>UI&nbsp;Design</title>
+    <style>
+        div {
+            font-family: "Times New Roman", 'KaiTi';
+        }
+        .menuBtn {
+            width: 95%;
+            height: 35px;
+            font-size: 23px;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: #fafafa;
+            box-sizing: border-box;
+        }
+        #blockDiv div, #funDiv div {
+            margin-top: 10px;
+            width: 30%;
+            margin-right: 3%;
+            height: 40px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 0;
+            border-radius: 15px;
+            background-color: #ffffff;
+            font-size: 25px;
+            color: white;
+            text-shadow: 0 0 3px black;
+        }
+        body {
+            display: flex;
+        }
+        #rightDiv {
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+        }
+        #dropDiv {
+            width: 100%;
+            min-height: 680px;
+            background-color: #f1ecec;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .component {
+            margin-bottom: 3px;
+            padding: 5px;
+        }
+        .component:hover {
+            box-shadow: 0 0 2px #002aff;
+        }
+
+        .leftDiv {
+            width: 20%;
+            background-color: #e9e9ea;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .label {
+            width: 100%;
+            display: block;
+            background-color: #eae5cc;
+            font-size: 23px;
+        }
+        .leftDivProps {
+            width: 20%;
+            background-color: #e9e9ea;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="leftDiv" id="leftDiv" >
+            <button class="menuBtn" id="blockButton" onclick="blockBt()">组件表</button><br>
+            <div id="blockDiv" style="display: none; width: 100%">
+                <div draggable="true" id="Button" class="component">按钮</div>
+                <div draggable="true" id="Text" class="component">文本框</div>
+                <div draggable="true" id="Txt" class="component">文本</div>
+                <div draggable="true" id="Img" class="component">图片</div>
+                <div draggable="true" id="Password" class="component">密码</div>
+                <div draggable="true" id="Submit" class="component">提交</div>
+                <div draggable="true" id="Form" class="component">表单</div>
+                <br>
+            </div>
+            <button class="menuBtn" id="funButton" onclick="funBt()">布局</button><br>
+            <div id="funDiv" style="display: none; width: 100%">
+                <div draggable="true" id="Fence" class="component">栅栏</div>
+                <br>
+            </div>
+    </div>
+    <div style="width: 60%;" id="rightDiv">
+        <label class="label">拖放区域</label>
+        <div id="dropDiv" ondragover="return false"></div>
+    </div>
+    <div class="leftDivProps" id="leftDivProps">
+        <label class="label" style="background-color: #938d8d">属性值</label>
+        <div id="leftDivPropsContent">
+            </div>
+    </div>
+    <script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+    <script type="text/javascript">
+        function blockBt(){
+            let display = document.getElementById("blockDiv").style.display;
+            if (display === "none"){
+                document.getElementById("blockDiv").style.display = "flex";
+                document.getElementById("blockDiv").style['flex-wrap'] = "wrap";
+            }else {
+                document.getElementById("blockDiv").style.display = "none";
+            }
+        }
+        function funBt(){
+            let display = document.getElementById("funDiv").style.display;
+            if (display === "none"){
+                document.getElementById("funDiv").style.display = "flex";
+                document.getElementById("funDiv").style['flex-wrap'] = "wrap";
+            }else {
+                document.getElementById("funDiv").style.display = "none";
+            }
+        }
+    </script>
+    <script>
+        let clicked;
+        let dragged;
+        let component_list = [];
+        let num = 0;
+        let leftDiv = document.getElementById('leftDiv');
+        let dropDiv = document.getElementById('dropDiv');
+        leftDiv.addEventListener("dragstart", function(event) {
+            dragged = event.target;
+            console.log('start');
+        }, false);
+
+        dropDiv.addEventListener("dragstart", function (evt) {
+            dragged = evt.target;
+        }, false)
+        dropDiv.addEventListener("dragover", function (evt) {
+
+        }, false)
+        dropDiv.addEventListener("drop", function(event) {
+            event.preventDefault();
+            let Div, Component;
+            if (event.target.id && event.target.id !== "fence"){
+                if (event.target.id === "dropDiv"){
+                    //点到dropDiv了
+                    console.log('拖到dropDiv了');
+                    Div = event.target;
+
+                }else if (event.target.id === "form") {
+                    //点到表单了
+                    console.log('拖到表单了');
+                    Div = event.target;
+                }
+                else {
+                    //点到组件容器了
+                    console.log('拖到组件容器了');
+                    Div = event.target.parentElement;
+                    Component = event.target;
+                }
+            }else {
+                if (event.target.parentElement.parentElement.id === "dropDiv" || event.target.parentElement.parentElement.id === "fence"){
+                    //点到组件本身了
+                    console.log('拖到组件本身了');
+                    Div = event.target.parentElement.parentElement;
+                    Component = event.target.parentElement;
+                }else {
+                    //点到栅栏了
+                    console.log('拖到栅栏了');
+                    Div = event.target;
+                }
+            }
+            let innerStr = '';
+            switch (dragged.id){
+                case 'Button': innerStr = '<button type="button" style="height: 32px;color: #4cb0f9">默认</button>';break;
+                case 'Text': innerStr = '<input type="text" placeholder="默认" maxlength="5"><label style="color: red"></label>';break;
+                case 'Txt': innerStr = '<p style="margin: 0">默认</p>';break;
+                case 'Img': innerStr = '<img src="/image/common/logo.png" style="min-height: 100px;min-width: 100px">';break;
+                case 'Fence': innerStr = '<div style="min-height: 100px;width: 100%;display: flex"><div id="fence" style="width: 50%;border: 1px dashed black;overflow: auto"></div><div id="fence" style="width: 50%;border: 1px dashed black;overflow: auto"></div></div>';break;
+                case 'Password': innerStr = '<input type="password"><label style="color: red"></label>';break;
+                case 'Submit': innerStr = '<button type="submit" style="height: 32px;color: #4cb0f9">提交</button>';break;
+                case 'Form': innerStr = '<form id="form" style="min-height: 100px;min-width: 100px;background-color: #b1b1b1"></form>';break;
+                default: break;
+            }
+            // 移动拖动的元素到所选择的放置目标节点
+            if (dragged){
+                if (Div.id === "dropDiv" || Div.id === "fence" || Div.id === "form") {
+                    if (component_list){
+                        //判断isExist来确认是copy还是move
+                        let isExist = false;
+                        for (const componentKey in component_list) {
+                            if (component_list[componentKey].component.id === dragged.id){
+                                console.log('do move');
+                                Div.insertBefore(dragged, Component);
+                                isExist = true;
+                                break;
+                            }
+                        }
+                        if (isExist === false){
+                            num += 1;
+                            console.log('do copy');
+                            let dragged_clone = dragged.cloneNode();
+                            dragged_clone.id = dragged.id + num.toString();
+                            dragged_clone.innerHTML = innerStr;
+                            let component = dragged_clone;
+                            component_list.push({component});
+                            Div.insertBefore(dragged_clone, Component);
+                            if (dragged.id === 'Text'){
+                                dragged_clone.firstChild.onchange =  function (){
+                                    if (dragged_clone.firstChild.value.startsWith('a')){
+                                        dragged_clone.lastChild.textContent = '以a开头';
+                                    }else {
+                                        dragged_clone.lastChild.textContent = '';
+                                    }
+                                }
+                            }
+                            if (dragged.id === 'Password'){
+                                dragged_clone.firstChild.onchange =  function (){
+                                    let pwdRegex = new RegExp('(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}');
+                                    if (dragged_clone.firstChild.value){
+                                        if (!pwdRegex.test(dragged_clone.firstChild.value)) {
+                                            dragged_clone.lastChild.textContent = '密码中必须包含大小写 字母、数字、特称字符，至少8个字符，最多30个字符';
+                                        }
+                                        else {
+                                            dragged_clone.lastChild.textContent = '密码合规';
+                                        }
+                                    }else {
+                                        dragged_clone.lastChild.textContent = '密码不能为空';
+                                    }
+
+                                }
+                            }
+                            // dragged_clone.addEventListener('keyup', function (evt){
+                            //     console.log('???');
+                            //     if (evt.keyCode === 46){
+                            //         if (clicked){
+                            //             console.log(clicked.parentNode);
+                            //             clicked.parentElement.removeChild(clicked);
+                            //             clicked = null;
+                            //         }
+                            //     }
+                            // })
+                            document.onkeyup = function (evt) {
+                                if (evt.keyCode === 46) {
+                                    if (clicked) {
+                                        console.log(clicked.parentNode);
+                                        clicked.parentElement.removeChild(clicked);
+                                        clicked = null;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            dragged = null;
+        }, false);
+
+        dropDiv.addEventListener('click', function (evt){
+            if (component_list){
+                for (const componentKey in component_list) {
+                    if (component_list[componentKey].component.id === evt.target.parentElement.id){
+                        clicked = component_list[componentKey].component;
+                        console.log('你在点什么：'+clicked.id);
+                        let str = '<label for="idInput">I&nbsp;D：</label><br><input id="idInput" type="text" value="' +
+                            component_list[componentKey].component.id +
+                            '"><br>';
+                        if (clicked.firstChild.tagName === 'FORM'){
+                            str = str + '<label for="formActionInput">提交地址：</label><br><input type="text" id="formActionInput" value="' +
+                                clicked.firstChild.action +
+                                '"><br>';
+                        }
+                        if (clicked.firstChild.type !== 'text' && clicked.firstChild.tagName !== 'IMG'&&clicked.firstChild.tagName !== 'FORM'&&clicked.firstChild.type !== 'password'){
+                            str = str + '<label for="contentInput">文本：</label><br><input type="text" id="contentInput" value="' +
+                                clicked.firstChild.textContent +
+                                '"><br>';
+                        }
+                        if (clicked.firstChild.tagName !== 'IMG'){
+                            str = str + '<label for="fontSizeInput">字体大小（px）：</label><br><input type="number" id="fontSizeInput" value="' +
+                                clicked.firstChild.style.fontSize.split('px')[0] +
+                                '"><br>';
+                            str = str + '<fieldset><legend>颜色</legend>' +
+                                '<label for="colorInput">字体颜色：</label><input type="color" id="colorInput" value="' +
+                                colorRGBtoHex(component_list[componentKey].component.firstChild.style.color, 'color') +
+                                '"><br><label for="backgroundInput">背景颜色：</label><input type="color" id="backgroundInput" value="' +
+                                colorRGBtoHex(clicked.firstChild.style.backgroundColor, 'back') +
+                                '"></fieldset>';
+                        }else {
+                            str = str + '<label for="imgInput">图片：</label><br><input type="file" id="imgInput" value="' +
+                                '"><br>';
+                        }
+
+                        str = str + '<fieldset><legend>宽高</legend>' +
+                            '<label for="widthInput">宽（px）：</label><input id="widthInput" type="number" value="' +
+                            component_list[componentKey].component.firstChild.style.width.split('px')[0] +
+                            '"><br>' +
+                            '<label for="heightInput">高（px）：</label><input id="heightInput" type="number" value="' +
+                            component_list[componentKey].component.firstChild.style.height.split('px')[0] +
+                            '"><br>' +
+                            '<label for="minWidthInput">最小宽（px）：</label><input id="minWidthInput" type="number" value="' +
+                            component_list[componentKey].component.firstChild.style.minWidth.split('px')[0] +
+                            '"><br>' +
+                            '<label for="minHeightInput">最小高（px）：</label><input id="minHeightInput" type="number" value="' +
+                            component_list[componentKey].component.firstChild.style.minHeight.split('px')[0] +
+                            '">' +
+                            '</fieldset>';
+                        str = str + '<fieldset><legend>边距</legend>' +
+                            '<fieldset><legend>内边距</legend>' +
+                            '<label for="leftPaddingInput">左内边距（px）：</label><input type="number" id="leftPaddingInput" value="' +
+                            clicked.firstChild.style.paddingLeft.split('px')[0] +
+                            '"><br>' +
+                            '<label for="rightPaddingInput">右内边距（px）：</label><input type="number" id="rightPaddingInput" value="' +
+                            clicked.firstChild.style.paddingRight.split('px')[0] +
+                            '"><br>' +
+                            '<label for="topPaddingInput">上内边距（px）：</label><input type="number" id="topPaddingInput" value="' +
+                            clicked.firstChild.style.paddingTop.split('px')[0] +
+                            '"><br>' +
+                            '<label for="bottomPaddingInput">下内边距（px）：</label><input type="number" id="bottomPaddingInput" value="' +
+                            clicked.firstChild.style.paddingBottom.split('px')[0] +
+                            '">' +
+                            '</fieldset>' +
+                            '<fieldset><legend>外边距</legend>' +
+                            '<label for="leftMarginInput">左外边距（px）：</label><input type="number" id="leftMarginInput" value="' +
+                            clicked.firstChild.style.marginLeft.split('px')[0] +
+                            '"><br>' +
+                            '<label for="rightMarginInput">右外边距（px）：</label><input type="number" id="rightMarginInput" value="' +
+                            clicked.firstChild.style.marginRight.split('px')[0] +
+                            '"><br>' +
+                            '<label for="topMarginInput">上外边距（px）：</label><input type="number" id="topMarginInput" value="' +
+                            clicked.firstChild.style.marginTop.split('px')[0] +
+                            '"><br>' +
+                            '<label for="bottomMarginInput">下外边距（px）：</label><input type="number" id="bottomMarginInput" value="' +
+                            clicked.firstChild.style.marginBottom.split('px')[0] +
+                            '">' +
+                            '</fieldset>' +
+                            // '<fieldset><legend>边框</legend>' +
+                            // '<label for="leftBorderInput">左边框（px）：</label><input type="number" id="leftBorderInput" value="' +
+                            // clicked.firstChild.style.borderLeft.split('px')[0] +
+                            // '"><br>' +
+                            // '<label for="rightBorderInput">右边框（px）：</label><input type="number" id="rightBorderInput" value="' +
+                            // clicked.firstChild.style.borderRight.split('px')[0] +
+                            // '"><br>' +
+                            // '<label for="topBorderInput">上边框（px）：</label><input type="number" id="topBorderInput" value="' +
+                            // clicked.firstChild.style.borderTop.split('px')[0] +
+                            // '"><br>' +
+                            // '<label for="bottomBorderInput">下边框（px）：</label><input type="number" id="bottomBorderInput" value="' +
+                            // clicked.firstChild.style.borderBottom.split('px')[0] +
+                            // '">' +
+                            // '</fieldset>' +
+                            '</fieldset>';
+                        document.getElementById('leftDivPropsContent').innerHTML = str;
+                        $("#idInput").bind("input propertychange", function (){
+                            clicked.id = $("#idInput")[0].value;
+                        });
+                        $("#contentInput").bind("input propertychange", function (){
+                            clicked.firstChild.textContent = $("#contentInput")[0].value;
+                        });
+                        $("#fontSizeInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.fontSize = $("#fontSizeInput")[0].value.toString() + 'px';
+                        });
+                        $("#imgInput").bind("input propertychange", function (){
+                            debugger
+                            clicked.firstChild.src = '/image/books/' + $("#imgInput")[0].files[0].name;
+                        });
+                        $("#colorInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.color = $("#colorInput")[0].value;
+                        });
+                        $("#backgroundInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.backgroundColor = $("#backgroundInput")[0].value;
+                        });
+                        $("#widthInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.width = $("#widthInput")[0].value.toString() + 'px';
+                        });
+                        $("#heightInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.height = $("#heightInput")[0].value.toString() + 'px';
+                        });
+                        $("#minWidthInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.minWidth = $("#minWidthInput")[0].value.toString() + 'px';
+                        });
+                        $("#minHeightInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.minHeight = $("#minHeightInput")[0].value.toString() + 'px';
+                        });
+                        $("#leftPaddingInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.paddingLeft = $("#leftPaddingInput")[0].value.toString() + 'px';
+                        });
+                        $("#rightPaddingInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.paddingRight = $("#rightPaddingInput")[0].value.toString() + 'px';
+                        });
+                        $("#topPaddingInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.paddingTop = $("#topPaddingInput")[0].value.toString() + 'px';
+                        });
+                        $("#bottomPaddingInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.paddingBottom = $("#bottomPaddingInput")[0].value.toString() + 'px';
+                        });
+                        $("#leftMarginInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.marginLeft = $("#leftMarginInput")[0].value.toString() + 'px';
+                        });
+                        $("#rightMarginInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.marginRight = $("#rightMarginInput")[0].value.toString() + 'px';
+                        });
+                        $("#topMarginInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.marginTop = $("#topMarginInput")[0].value.toString() + 'px';
+                        });
+                        $("#bottomMarginInput").bind("input propertychange", function (){
+                            clicked.firstChild.style.marginBottom = $("#bottomMarginInput")[0].value.toString() + 'px';
+                        });
+                        // $("#leftBorderInput").bind("input propertychange", function (){
+                        //     clicked.firstChild.style.borderLeft = $("#leftBorderInput")[0].value.toString() + 'px';
+                        // });
+                        // $("#rightBorderInput").bind("input propertychange", function (){
+                        //     clicked.firstChild.style.borderRight = $("#rightBorderInput")[0].value.toString() + 'px';
+                        // });
+                        // $("#topBorderInput").bind("input propertychange", function (){
+                        //     clicked.firstChild.style.borderTop = $("#topBorderInput")[0].value.toString() + 'px';
+                        // });
+                        // $("#bottomBorderInput").bind("input propertychange", function (){
+                        //     clicked.firstChild.style.borderBottom = $("#bottomBorderInput")[0].value.toString() + 'px';
+                        // });
+                    }else if (component_list[componentKey].component.id === evt.target.parentElement.parentElement.id) {
+                        clicked = component_list[componentKey].component;
+                        console.log('你在点什么：'+clicked.id);
+                        let str = '<label for="idInput">I&nbsp;D：</label><br><input id="idInput" type="text" value="' +
+                            component_list[componentKey].component.id +
+                            '"><br>';
+                        str = str + '<label for="leftFenceInput">左栅栏宽（%）：</label><br><input type="text" id="leftFenceInput" value="' +
+                            clicked.firstChild.firstChild.style.width.split('%')[0] +
+                            '"><br>';
+                        str = str + '<label for="rightFenceInput">右栅栏宽（%）：</label><br><input type="text" id="rightFenceInput" value="' +
+                            clicked.firstChild.lastChild.style.width.split('%')[0] +
+                            '">';
+                        document.getElementById('leftDivPropsContent').innerHTML = str;
+                        $("#leftFenceInput").bind("input propertychange", function (){
+                            clicked.firstChild.firstChild.style.width = $("#leftFenceInput")[0].value.toString() + '%';
+                        });
+                        $("#rightFenceInput").bind("input propertychange", function (){
+                            clicked.firstChild.lastChild.style.width = $("#rightFenceInput")[0].value.toString() + '%';
+                        });
+                    }
+                }
+            }
+        })
+        function colorRGBtoHex(color, model) {
+            if (color){
+                let rgb = color.split(',');
+                let r = parseInt(rgb[0].split('(')[1]);
+                let g = parseInt(rgb[1]);
+                let b = parseInt(rgb[2].split(')')[0]);
+                let hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+                return hex;
+            }
+            if (model === "color"){
+                return '#000000';
+            }
+            return '#ffffff';
+        }
+    </script>
+</body>
+
+</html>

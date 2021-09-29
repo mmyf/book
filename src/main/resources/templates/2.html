@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" draggable="false">
+<head>
+    <meta charset="UTF-8">
+    <title>UI&nbsp;Design</title>
+    <style>
+        div {
+            font-family: "Times New Roman", 'KaiTi';
+        }
+        /**:hover {*/
+        /*    border: 2px solid black;*/
+        /*}*/
+        .menuBtn {
+            width: 100%;
+            height: 30px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        #blockDiv div {
+            margin-top: 10px;
+            width: 30%;
+            margin-right: 3%;
+            height: 25px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            background-color: #e4e4e5;
+            padding: 0;
+        }
+        body {
+            display: flex;
+        }
+        #rightDiv {
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none; user-select:none;
+        }
+    </style>
+</head>
+<body>
+
+    <div style="width: 20%" id="leftDiv" draggable="true">
+            <button class="menuBtn" id="blockButton" >块级元素</button>
+    </div>
+    <div   style="width: 60%;height: 500px; background-color: azure" id="rightDiv" >
+        <div style="width: 100%;display: block" draggable="false">拖放区域</div>
+    </div>
+
+<!--    <input type="text" placeholder="test test test">-->
+    <script>
+        // let leftDiv = document.getElementById('leftDiv');
+        document.addEventListener('dragstart',handleDragStart);
+        function handleDragStart () {
+            console.log('hello');
+        }
+        function allowDrop(ev){
+            ev
+        }
+    </script>
+</body>
+</html>

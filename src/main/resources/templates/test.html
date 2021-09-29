@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script type="text/javascript" src="jquery-1.8.2.min.js"></script>
+  <script type="text/javascript">
+
+    function fileExists(url){
+      var isExists;
+      $.ajax({
+        url:url,
+        async:false,
+        type:'HEAD',
+        timeout:2000,
+        error:function(){
+          isExists=0;
+        },
+        success:function(){
+          isExists=1;
+        }
+      });
+      if(isExists==1){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+
+    function sleep(numberMillis) {
+      var now = new Date();
+      var exitTime = now.getTime() + numberMillis;
+      while (true) {
+        now = new Date();
+        if (now.getTime() > exitTime) return;
+      }
+    }
+
+    function abc(){
+     var myFormData = new FormData();
+     myFormData.append('myFile',$("#file")[0].files[0]);
+
+      // alert($("#file").content);
+      $.ajax({
+        url: "test",
+        type: "POST",
+        data: myFormData,
+        processData: false,
+        contentType: false,
+        success: function(response){
+          // 根据返回结果指定界面操作
+          while (true){
+              sleep(500);
+              if (fileExists(response)){
+                alert("find file!");
+                break;
+              }
+              console.log("please wait"+new Date());
+          }
+          document.getElementById("img").src = response;
+          alert(response);
+        },
+        error: function (){
+          alert("error");
+        }
+      });
+    }
+$("#file").change(function (){
+  console.log("11success");
+  alert($("#file").val());
+})
+
+  </script>
+</head>
+<body>
+<form>
+  <input id="file" name="file" type="file"/>
+  <input id="token" name="token" type="hidden" />
+  <button type="button" onclick="abc()">ddd</button>
+  <br>
+</form>
+<img id="img" src="">
+
+</body>
+</html>
